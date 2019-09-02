@@ -18,7 +18,7 @@ class Counter extends Component {
     render() {
         return (<div className="container">
             <h1 className="text-center">
-                {this.getTxt()} <span style={{'font-size': '1rem'}}>v{this.state.ver}</span>
+                {this.getTxt()} <span style={{'fontSize': '1rem'}}>v{this.state.ver}</span>
             </h1>
             <ul className="list-group">
                 {this.state.tags.map(tag => <li key={tag} className="list-group-item">{tag}</li>)}
@@ -27,6 +27,7 @@ class Counter extends Component {
             {this.state.items.map(
                 item => <Item key={item.id} onDelete={this.handleDelete} data={item}/>
                 )}
+            {this.addItemButton()}
         </div>)
     };
 
@@ -40,8 +41,21 @@ class Counter extends Component {
             {this.state.btnText}: {this.state.cnt}</button>;
     }
 
+    addItemButton(){
+        return <button className="mt-4 btn btn-success" onClick={this.handleAdd}>Add new Item</button>;
+    }
+
     handleClick = () => {
         this.setState({cnt: this.state.cnt + 1});
+    };
+
+    handleAdd = () => {
+        console.log(this.state.items);
+        const nextN = this.state.items.length + 1;
+        const items = this.state.items.concat({id: nextN, value: 'V' + nextN});
+        console.log(nextN);
+        console.log(items);
+        this.setState({items});
     };
 
     handleDelete = itemId => {
