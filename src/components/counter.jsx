@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Item from "./item";
 
 class Counter extends Component {
@@ -42,7 +44,7 @@ class Counter extends Component {
     }
 
     addItemButton(){
-        return <button className="mt-4 btn btn-success" onClick={this.handleAdd}>Add new Item</button>;
+        return <button className="mt-4 btn btn-success" onClick={this.handleAdd}><FontAwesomeIcon icon={faPlus} /> Add new Item</button>;
     }
 
     handleClick = () => {
