@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCreativeCommonsZero} from "@fortawesome/free-brands-svg-icons";
 import Item from "./item";
 
-class Counter extends Component {
+class Root extends Component {
     state = {
         cnt: 0,
         txt: 'React World',
@@ -17,6 +18,15 @@ class Counter extends Component {
         ]
     };
 
+    constructor(props) {
+        super(props);
+        window.document.title = this.state.txt;
+    }
+
+    // componentDidMount(){
+    //     console.log('componentDidMount');
+    // }
+
     render() {
         return (<div className="container">
             <h1 className="text-center">
@@ -25,11 +35,9 @@ class Counter extends Component {
             <ul className="list-group">
                 {this.state.tags.map(tag => <li key={tag} className="list-group-item">{tag}</li>)}
             </ul>
-            {this.setBtn()}
-            {this.state.items.map(
-                item => <Item key={item.id} onDelete={this.handleDelete} data={item}/>
-                )}
-            {this.addItemButton()}
+            {this.setBtnCnt()}{this.setBtnCntReset()}
+            {this.state.items.map(item => <Item key={item.id} onDelete={this.handleDelete} data={item}/>)}
+            <div>{this.addItemButton()}</div>
         </div>)
     };
 
@@ -38,13 +46,19 @@ class Counter extends Component {
         return this.state.txt;
     };
 
-    setBtn() {
+    setBtnCnt() {
         return <button onClick={this.handleClick} className="mt-2 btn btn-primary">
             {this.state.btnText}: {this.state.cnt}</button>;
     }
 
-    addItemButton(){
-        return <button className="mt-4 btn btn-success" onClick={this.handleAdd}><FontAwesomeIcon icon={faPlus} /> Add new Item</button>;
+    setBtnCntReset() {
+        return <button onClick={() => this.setState({cnt: 0})} className="ml-2 mt-2 btn btn-secondary">
+            <FontAwesomeIcon icon={faCreativeCommonsZero}/> Reset</button>;
+    }
+
+    addItemButton() {
+        return <button className="mt-4 btn btn-success" onClick={this.handleAdd}>
+            <FontAwesomeIcon icon={faPlus}/> New item</button>;
     }
 
     handleClick = () => {
@@ -67,4 +81,4 @@ class Counter extends Component {
     };
 }
 
-export default Counter;
+export default Root;
