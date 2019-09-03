@@ -1,5 +1,6 @@
 module.exports = {
     apps : [{
+        cwd: '/home/smart/git/xreact/',
         name: 'xreact',
         script: 'npm',
         args: "start",
